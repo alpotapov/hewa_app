@@ -1,8 +1,8 @@
 [ ] First Flow - первое, что видит пользователь
 
-&nbsp;&nbsp;&nbsp;&nbsp;[ ] Кнопка "Add Test" и текстовое пояснение
+&nbsp;&nbsp;&nbsp;&nbsp;[x] Кнопка "Add Test" и текстовое пояснение
 
-&nbsp;&nbsp;&nbsp;&nbsp;[ ] Сканирование уникального id теста в виде QR-кода с бумажки
+&nbsp;&nbsp;&nbsp;&nbsp;[x] Сканирование уникального id теста в виде QR-кода с бумажки
 
 &nbsp;&nbsp;&nbsp;&nbsp;[ ] Persistence: сохранение guid в память устройства
 
