@@ -4,7 +4,7 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;[x] Сканирование уникального id теста в виде QR-кода с бумажки
 
-&nbsp;&nbsp;&nbsp;&nbsp;[ ] Persistence: сохранение guid в память устройства
+&nbsp;&nbsp;&nbsp;&nbsp;[x] Persistence: сохранение guid в память устройства
 
 &nbsp;&nbsp;&nbsp;&nbsp;[ ] Экран после сканирования - уведомить пользователя, что результат будет через ~15 минут
 

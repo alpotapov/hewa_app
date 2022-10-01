@@ -4,7 +4,7 @@ const validateGuid = (guid) => {
   return true;
 }
 
-const handleGuidInput = async (guid) => {
+const handleInput = async (guid) => {
   // return codes:
   // - 0 : ok
   // - 1 : entry already exists
@@ -19,5 +19,5 @@ const handleGuidInput = async (guid) => {
 }
 
 export default {
-  handleGuidInput,
+  handleInput,
 }

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Text } from 'react-native';
+import { useLocation, useNavigate } from 'react-router-native';
 
-import firstFlowDomain from '../../domain/firstFlow';
+import guidScanningDomain from '../../domain/guidScanning';
 import CallToAction from './components/CallToAction';
 import ActiveCamera from './components/ActiveCamera';
 
@@ -9,6 +10,7 @@ import Logo from './assets/Logo.png';
 
 
 export default function FirstView() {
+  const navigate = useNavigate();
   const [cameraActive, setCameraActive] = React.useState(false);
   const onActivateCamera = () => {
     setCameraActive(true);
@@ -18,9 +20,9 @@ export default function FirstView() {
   }
 
   const onResult = (guid) => {
-    firstFlowDomain.handleGuidInput(guid).then((output) => {
+    guidScanningDomain.handleInput(guid).then((output) => {
       if (output === 0) {
-        alert('Redirecting to FirstFlowSuccess page');
+        navigate('/first-flow/success');
       } else if (output === 1) {
         alert('This test is already in your HealthWallet')
       } else {
