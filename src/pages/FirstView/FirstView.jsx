@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Image, Text } from 'react-native';
-import { useLocation, useNavigate } from 'react-router-native';
+import { View, Image } from 'react-native';
+import { useNavigate } from 'react-router-native';
 
 import guidScanningDomain from '../../domain/guidScanning';
 import CallToAction from './components/CallToAction';

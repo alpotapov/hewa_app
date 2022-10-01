@@ -5,21 +5,23 @@ import { useNavigate } from 'react-router-native';
 import Logo from './assets/Logo.png';
 import PlusIcon from './assets/PlusIcon.png';
 
-export default function FirstViewSuccess() {
+export default function Dashboard() {
   const navigate = useNavigate();
 
-  const navigateToDashboard = () => {
-    navigate()
+  const navigateToFirstFlow = () => {
+    navigate('/first-flow');
   }
 
   return (
     <View className="h-full">
-      <View className="flex-1">
-        <Text>Success. Now wait 15 minutes</Text>
-        <TouchableOpacity className="bg-cornflower rounded-lg mx-6 px-6" onPress={() => {}}>
+      <View className="flex-1 space-y-6 flex flex-col justify-center">
+        <View className="flex-none px-6">
+          <Text className="text-lg text-cornflower">Dashboard</Text>
+        </View>
+        <TouchableOpacity className="bg-cornflower rounded-lg mx-6 px-6" onPress={navigateToFirstFlow}>
           <View className="flex flex-row justify-between items-center h-14 ">
             <Image className="flex-none w-6 h-6" source={PlusIcon} />
-            <Text className="flex-1 text-white text-center font-bold">Add Test</Text>
+            <Text className="flex-1 text-white text-center font-bold">New Test</Text>
           </View>
         </TouchableOpacity>
       </View>
