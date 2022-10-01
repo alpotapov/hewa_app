@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 
+import firstFlowDomain from '../../domain/firstFlow';
 import CallToAction from './components/CallToAction';
 import ActiveCamera from './components/ActiveCamera';
 
@@ -17,7 +18,15 @@ export default function FirstView() {
   }
 
   const onResult = (guid) => {
-    console.log(`Scanned new guid: ${guid}`);
+    firstFlowDomain.handleGuidInput(guid).then((output) => {
+      if (output === 0) {
+        alert('Redirecting to FirstFlowSuccess page');
+      } else if (output === 1) {
+        alert('This test is already in your HealthWallet')
+      } else {
+        alert(`An error occured. Code ${output}`);
+      }
+    });
     onDeactivateCamera();
   }
 
