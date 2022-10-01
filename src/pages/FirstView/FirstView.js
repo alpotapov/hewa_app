@@ -1,14 +1,23 @@
 import React from 'react';
 import { Camera, CameraType } from 'expo-camera';
-// import { BarCodeScanner } from 'expo-barcode-scanner';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Text, View, TouchableOpacity, Image, Button } from 'react-native';
 
 import PlusIcon from './assets/PlusIcon.png'
 import Logo from './assets/Logo.png';
 import Explainer from './assets/Explainer.png';
 
-const CameraContainer = () => {
+const CameraContainer = ({ onResult }) => {
   const [permission, requestPermission] = Camera.useCameraPermissions();
+  const resultExists = React.useRef(false);
+
+  const onScanned = (args) => {
+    const { data } = args;
+    if (data) {
+      resultExists.current = true;
+    }
+    onResult(data);
+  }
 
   if (!permission) {
     return <View />;
@@ -21,19 +30,26 @@ const CameraContainer = () => {
       </View>
     );
   }
+
+  return (
+    <BarCodeScanner
+      className="flex-1 h-full w-full"
+      onBarCodeScanned={resultExists.current === true ? undefined : onScanned}
+      barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+      type={CameraType.back}
+    />
+  );
   
-  return (<Camera className="flex-1 h-full w-full" type={CameraType.back} />);
 }
 
-const ActiveCamera = ({ onDeactivateCamera }) => {
+const ActiveCamera = ({ onDeactivateCamera, onResult }) => {
   return (
     <View className="flex-1 space-y-6 flex flex-col justify-center">
-      {/* <BarCodeScanner onBarCodeRead={() => console.log('read')} /> */}
       <View className="flex-none px-6">
         <Text className="text-lg text-cornflower">Scan QR-code on the test cartridge to receive test result.</Text>
       </View>
       <View className="flex items-center w-full h-64 px-6">
-        <CameraContainer />
+        <CameraContainer onResult={onResult} />
       </View>
       <TouchableOpacity className="bg-red-100 rounded-lg mx-6 px-6" onPress={onDeactivateCamera}>
         <View className="flex flex-row justify-between items-center h-14 ">
@@ -73,11 +89,16 @@ export default function FirstView() {
     setCameraActive(false);
   }
 
+  const onResult = (guid) => {
+    console.log(`Scanned new guid: ${guid}`);
+    onDeactivateCamera();
+  }
+
   return (
     <View className="h-full">
       <View className="flex-1">
         {cameraActive ? (
-          <ActiveCamera onDeactivateCamera={onDeactivateCamera} />
+          <ActiveCamera onResult={onResult} onDeactivateCamera={onDeactivateCamera} />
         ) : (
           <ExplainerElement onActivateCamera={onActivateCamera} />
         )}
