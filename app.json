@@ -1,8 +1,9 @@
 {
   "expo": {
     "name": "hewa_app",
-    "slug": "hewa_app",
-    "version": "1.0.0",
+    "slug": "healthwallet",
+    "owner": "alpotapov",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
