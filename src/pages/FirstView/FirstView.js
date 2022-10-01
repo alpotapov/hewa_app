@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image } from 'react-native';
 
 import CallToAction from './components/CallToAction';
+import ActiveCamera from './components/ActiveCamera';
 
 import Logo from './assets/Logo.png';
 

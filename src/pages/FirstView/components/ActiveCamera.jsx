@@ -1,3 +1,4 @@
+import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import { BarCodeScanner } from 'expo-barcode-scanner';

@@ -1,5 +1,6 @@
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 
+import PlusIcon from '../assets/PlusIcon.png'
 import Explainer from '../assets/Explainer.png';
 
 export default function CallToAction({ onActivateCamera }) {
