@@ -32,10 +32,17 @@ export default function FirstView() {
     onDeactivateCamera();
   }
 
+  const onNavigateToDashboard = () => {
+    navigate('/dashboard');
+  }
+
   return (
     <View className="h-full">
       <View className="flex-none flex flex-row justify-end items-center">
-        <TouchableOpacity className="flex-none h-10 px-6 mt-2 w-1/2 flex flex-row justify-end items-center" onPress={() => {}}>
+        <TouchableOpacity 
+          className="flex-none h-10 px-6 mt-2 w-1/2 flex flex-row justify-end items-center"
+          onPress={onNavigateToDashboard}
+        >
           <Text className="flex-shrink text-cornflower">Return to Dashboard</Text>
         </TouchableOpacity>
       </View>
