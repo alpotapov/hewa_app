@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity, Text } from 'react-native';
 import { useNavigate } from 'react-router-native';
 
 import guidScanningDomain from '../../domain/guidScanning';
@@ -34,6 +34,11 @@ export default function FirstView() {
 
   return (
     <View className="h-full">
+      <View className="flex-none flex flex-row justify-end items-center">
+        <TouchableOpacity className="flex-none h-10 px-6 mt-2 w-1/2 flex flex-row justify-end items-center" onPress={() => {}}>
+          <Text className="flex-shrink text-cornflower">Return to Dashboard</Text>
+        </TouchableOpacity>
+      </View>
       <View className="flex-1">
         {cameraActive ? (
           <ActiveCamera onResult={onResult} onDeactivateCamera={onDeactivateCamera} />
