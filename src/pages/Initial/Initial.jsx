@@ -8,7 +8,6 @@ const Initial = () => {
 
   React.useEffect(() => {
     appFlowDomain.shouldGoToFirstFlow().then((result) => {
-      console.log({ result })
       if (result) {
         setRedirectComponent(<Navigate to='/first-flow' />);
         return;

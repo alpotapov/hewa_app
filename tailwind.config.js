@@ -7,6 +7,9 @@ module.exports = {
         'cornflower': {
           DEFAULT: '#9BB0E9',
         },
+        'seashell': {
+          DEFAULT: '#F1F1F1',
+        },
       },
     },
   },

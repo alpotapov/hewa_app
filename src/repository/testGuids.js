@@ -3,7 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const read = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('guidList');
-    return jsonValue ? JSON.parse(jsonValue) : [];
+    const result = jsonValue ? JSON.parse(jsonValue) : [];
+    return result;
   } catch (e) {
     console.error(e);
     return [];
@@ -12,7 +13,7 @@ const read = async () => {
 
 const exists = async (guidToCheck) => {
   const existingGuids = await read();
-  const matching = existingGuids.find((guid) => guid === guidToCheck);
+  const matching = existingGuids.find((guid) => guid.value === guidToCheck.value);
   return !!matching;
 }
 
@@ -39,8 +40,19 @@ const count = async () => {
   return existingGuids.length;
 }
 
+const clear = async () => {
+  const keysToRemove = ['guidList'];
+  try {
+    await AsyncStorage.multiRemove(keysToRemove);
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
 export default {
   save,
   read,
   count,
+  clear,
 }
