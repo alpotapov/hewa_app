@@ -6,12 +6,14 @@ import FirstView from './src/pages/FirstView/FirstView';
 import FirstFlowSuccess from './src/pages/FirstFlowSuccess/FirstFlowSuccess';
 import Dashboard from './src/pages/Dashboard/Dashboard';
 import Initial from './src/pages/Initial/Initial';
+import Backup from './src/pages/Backup/Backup';
 
 export default function App() {
   return (
     <NativeRouter>
       <View className="pt-6">
         <Routes>
+          <Route path="/backup" element={<Backup />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/first-flow/success" element={<FirstFlowSuccess />} />
           <Route path="/first-flow" element={<FirstView />} />

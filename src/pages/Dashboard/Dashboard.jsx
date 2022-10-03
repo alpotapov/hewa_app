@@ -15,8 +15,12 @@ export default function Dashboard() {
   const navigateToFirstFlow = () => {
     navigate('/first-flow');
   }
+  const navigateToBackup = () => {
+    navigate('/backup');
+  }
 
   const [walletEntries, setWalletEntries] = React.useState([]);
+  const [showBackupWarning, setShowBackupWarning] = React.useState(true);
 
   React.useEffect(() => {
     // walletEntryDomain.clear()
@@ -27,7 +31,18 @@ export default function Dashboard() {
 
   return (
     <View className="h-full">
-      <View className="flex-none h-40 space-y-6 flex flex-col justify-center">
+      <View className="flex-none h-40 flex flex-col justify-center">
+        {showBackupWarning 
+          ? (
+            <View className="">
+              <TouchableOpacity className="bg-red-300 rounded-lg mx-6 px-6" onPress={navigateToBackup}>
+                <View className="flex flex-row justify-between items-center h-14 ">
+                  <Image className="flex-none w-6 h-6" source={PlusIcon} />
+                  <Text className="flex-1 text-white text-center font-bold">Create Backup</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          ) : null}
         <View className="flex-none px-6">
           <Text className="text-lg text-cornflower">Dashboard</Text>
         </View>
