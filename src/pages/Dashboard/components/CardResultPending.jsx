@@ -6,7 +6,6 @@ import DropShadow from 'react-native-drop-shadow';
 // import IconGray from '../assets/IconGray.svg';
 
 const CardResultPending = ({ entry }) => {
-  console.log({ entry1: entry });
   return (
     <DropShadow
       style={{

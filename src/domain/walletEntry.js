@@ -23,7 +23,6 @@ const handleInput = async (guid) => {
 
   // const isValid = validateGuid(guid);
   const newEntry = createFromGuid(guid);
-  console.log({ newEntry });
   const result = await testGuidsRepository.save(newEntry);
 
   return result;

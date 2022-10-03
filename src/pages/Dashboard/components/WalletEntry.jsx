@@ -5,7 +5,6 @@ import { View, Text } from 'react-native';
 import CardResultPending from './CardResultPending';
 
 const WalletEntry = ({ entry }) => {
-  console.log({ entry });
   return (
     <View className="mt-6">
       <CardResultPending entry={entry} />
