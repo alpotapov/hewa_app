@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
 import { useNavigate } from 'react-router-native';
 
-import walletEntryDomain from '../../domain/walletEntry';
+import walletDomain from '../../domain/wallet';
 import CallToAction from './components/CallToAction';
 import ActiveCamera from './components/ActiveCamera';
 
@@ -20,7 +20,7 @@ export default function FirstView() {
   }
 
   const onResult = (guid) => {
-    walletEntryDomain.handleInput(guid).then((output) => {
+    walletDomain.handleInput(guid).then((output) => {
       if (output === 0) {
         navigate('/first-flow/success');
       } else if (output === 1) {

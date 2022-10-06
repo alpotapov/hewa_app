@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigate } from 'react-router-native';
 
-import walletEntryDomain from '../../domain/walletEntry';
+import walletDomain from '../../domain/wallet';
 
 import WalletEntry from './components/WalletEntry';
 
@@ -16,15 +16,15 @@ export default function Dashboard() {
     navigate('/first-flow');
   }
   const navigateToBackup = () => {
-    navigate('/backup');
+    navigate('/create-wallet');
   }
 
   const [walletEntries, setWalletEntries] = React.useState([]);
   const [showBackupWarning, setShowBackupWarning] = React.useState(true);
 
   React.useEffect(() => {
-    // walletEntryDomain.clear()
-    walletEntryDomain.readAll().then((entries) => {
+    // walletDomain.clear()
+    walletDomain.readAll().then((entries) => {
       setWalletEntries(entries);
     });
   }, []);

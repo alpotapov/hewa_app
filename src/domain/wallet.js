@@ -1,4 +1,6 @@
+import { ethers } from "ethers";
 import testGuidsRepository from "../repository/testGuids";
+import secretsRepository from "../repository/secrets";
 
 const createFromGuid = (guid) => {
   return {
@@ -33,8 +35,15 @@ const readAll = async () => {
   return guids;
 }
 
+const createWallet = async () => {
+  const wallet = ethers.Wallet.createRandom();
+  console.log({ wallet });
+  await secretsRepository.savePrivateKey(wallet.privateKey)
+}
+
 export default {
   readAll,
   handleInput,
   clear: testGuidsRepository.clear,
+  createWallet,
 }
