@@ -1,3 +1,4 @@
+import "@ethersproject/shims";
 import { ethers } from "ethers";
 import testGuidsRepository from "../repository/testGuids";
 import secretsRepository from "../repository/secrets";
@@ -41,9 +42,18 @@ const createWallet = async () => {
   await secretsRepository.savePrivateKey(wallet.privateKey)
 }
 
+const loadWallet = async () => {
+  const pk = await secretsRepository.readPrivateKey();
+  if (pk) {
+    const wallet = new ethers.Wallet(pk);
+    return wallet;
+  }
+}
+
 export default {
   readAll,
   handleInput,
   clear: testGuidsRepository.clear,
   createWallet,
+  loadWallet,
 }

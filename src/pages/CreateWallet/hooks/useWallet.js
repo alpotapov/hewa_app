@@ -1,11 +1,19 @@
-// import walletDomain from '../../../domain/wallet';
+import React from 'react';
+import walletDomain from '../../../domain/wallet';
 
 export default () => {
-  const wallet = null;
+  const [wallet, setWallet] = React.useState(null);
 
-  const createWallet = () => {
-    // walletDomain.createWallet()
+  const createWallet = async () => {
+    const newWallet = await walletDomain.createWallet();
+    setWallet(newWallet);
   }
+
+  React.useEffect(() => {
+    walletDomain.loadWallet().then((existingWallet) => {
+      setWallet(existingWallet);
+    })
+  }, []);
 
   return {
     wallet,
