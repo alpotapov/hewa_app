@@ -2,7 +2,7 @@ import React from 'react';
 
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useNavigate } from 'react-router-native';
-import useWallet from '../CreateWallet/hooks/useWallet';
+import useWallet from '../../hooks/useWallet';
 
 import PlusIcon from './assets/PlusIcon.png';
 import Logo from './assets/Logo.png';

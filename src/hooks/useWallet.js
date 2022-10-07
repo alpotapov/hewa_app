@@ -1,5 +1,5 @@
 import React from 'react';
-import walletDomain from '../../../domain/wallet';
+import walletDomain from '../domain/wallet';
 
 export default () => {
   const [wallet, setWallet] = React.useState(null);
