@@ -1,3 +1,4 @@
+import "react-native-get-random-values";
 import "node-libs-expo/globals";
 import crypto from 'msrcrypto';
 import { TextEncoder, TextDecoder } from 'fastestsmallesttextencoderdecoder';

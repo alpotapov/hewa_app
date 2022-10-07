@@ -27,6 +27,7 @@
     "react-native": "0.69.6",
     "react-native-blob-util": "^0.16.2",
     "react-native-drop-shadow": "^0.0.5",
+    "react-native-get-random-values": "^1.8.0",
     "react-router-native": "^6.4.1",
     "tailwindcss": "^3.1.8",
     "text-encoding-polyfill": "^0.6.7"
