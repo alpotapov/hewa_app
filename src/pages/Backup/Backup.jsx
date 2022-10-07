@@ -2,6 +2,7 @@ import React from 'react';
 
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useNavigate } from 'react-router-native';
+import useWallet from '../CreateWallet/hooks/useWallet';
 
 import PlusIcon from './assets/PlusIcon.png';
 import Logo from './assets/Logo.png';
@@ -9,6 +10,7 @@ import Logo from './assets/Logo.png';
 const Backup = () => {
   const [recoveryEmail, onRecoveryEmailChange] = React.useState('');
   const navigate = useNavigate();
+  const { createBackup } = useWallet();
 
   const navigateToDashboard = () => {
     navigate('/dashboard');
@@ -16,6 +18,7 @@ const Backup = () => {
 
   const onStartBackup = () => {
     console.log(`creating backup for email ${recoveryEmail}`);
+    createBackup();
   }
   
   return (

@@ -9,6 +9,12 @@ export default () => {
     setWallet(newWallet);
   }
 
+  const createBackup = async (assignDefaultGuardian) => {
+    const encrypted = await walletDomain.exportEncryptedBackup();
+
+    console.log(encrypted);
+  };
+
   React.useEffect(() => {
     walletDomain.loadWallet().then((existingWallet) => {
       setWallet(existingWallet);
@@ -18,5 +24,6 @@ export default () => {
   return {
     wallet,
     createWallet,
+    createBackup,
   }
 }
