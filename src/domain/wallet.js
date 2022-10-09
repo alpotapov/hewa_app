@@ -64,9 +64,21 @@ const loadWallet = async () => {
   }
 }
 
-const encryptWithLit = async (data) => {
-  const accessControlConditions = [];
+const encryptWithLit = async (data, dataAccessTokenId) => {
   const chain = 'ethereum';
+  const accessControlConditions = [{
+      contractAddress: '',
+      standardContractType: 'ERC721',
+      chain,
+      method: 'ownerOf',
+      parameters: [
+        dataAccessTokenId
+      ],
+      returnValueTest: {
+        comparator: '=',
+        value: ':userAddress',
+      }
+    }];
   const authSig = await LitJsSDK.checkAndSignAuthMessage({ chain });
   const { encryptedString, symmetricKey } =  await LitJsSDK.encryptString(data);
   const encryptedSymmetricKey = await LitNodeClient.saveEncryptionKey({
