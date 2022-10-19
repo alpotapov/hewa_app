@@ -23,6 +23,7 @@
     "msrcrypto": "^1.5.8",
     "nativewind": "^2.0.11",
     "node-libs-expo": "^0.0.3",
+    "prop-types": "^15.8.1",
     "react": "18.0.0",
     "react-native": "0.69.6",
     "react-native-blob-util": "^0.16.2",
@@ -33,7 +34,12 @@
     "text-encoding-polyfill": "^0.6.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react-native": "^4.0.0"
   },
   "private": true
 }
