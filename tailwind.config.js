@@ -1,17 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
+  content: ['./App.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        'cornflower': {
+        amaranth: {
+          DEFAULT: '#EC2A58',
+        },
+        cornflower: {
           DEFAULT: '#9BB0E9',
         },
-        'seashell': {
+        seashell: {
           DEFAULT: '#F1F1F1',
         },
       },
     },
   },
   plugins: [],
-}
+};
