@@ -1,8 +1,31 @@
+# Health Wallet Mobile App
+
+## QR Code Data
+
+```
+{
+    value: guid,
+    localData: {
+      testType: string, // 'B16' or 'Ferritin'
+      dateCreated: Date.now(),
+      status: 'Pending',
+    },
+  }
+```
+
+## User Stories
+
 [ ] Result Upload Flow - DxReader публикует результаты анализа через Gateway
+
+-- [x] предоставить Саше данные для загрузки результатов: адрес и эндпоинты, короткая инструкция
+
+-- [ ] протестировать взаимодействие с DxReader
 
 [ ] Backup Flow - пользователь создает бэкап и восстанавливает свои данные на новом устройстве
 
 -- [x] бэкэнд минтит новый токен для сгенерированного с помощью HealthWallet адреса кошелька
+
+-- [ ] дождаться версии >1.1.5 https://www.npmjs.com/package/@usedapp/core - изменения, позволяющие использовать useDapp на React-Native уже в мастере.
 
 -- [ ] в приложении пользователь видит статус токена и его id
 

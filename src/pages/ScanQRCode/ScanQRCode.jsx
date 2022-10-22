@@ -24,7 +24,7 @@ function ScanQRCode() {
   const onResult = (guid) => {
     walletDomain.handleInput(guid).then((output) => {
       if (output === 0) {
-        navigate('/first-flow/success');
+        navigate('/');
       } else if (output === 1) {
         // eslint-disable-next-line no-undef
         alert('This test is already in your HealthWallet');
