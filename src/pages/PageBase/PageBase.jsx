@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { useNavigate } from 'react-router-native';
 
-// import Menu from './components/Menu';
-
 import Logo from './assets/Logo.png';
 // import MenuIcon from './assets/Menu.png';
 import Back from './assets/buttonBack.png';

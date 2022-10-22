@@ -5,11 +5,11 @@ import DropShadow from 'react-native-drop-shadow';
 
 // import IconGray from '../assets/IconGray.svg';
 
-const CardResultPending = ({ entry }) => {
+function CardResultPending({ entry }) {
   return (
     <DropShadow
       style={{
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: {
           width: 0,
           height: 0,
@@ -36,7 +36,7 @@ const CardResultPending = ({ entry }) => {
       </View>
     </DropShadow>
   );
-};
+}
 
 // CardResultPending.propTypes = {
 //   entry: PropTypes.shape().isRequired,
