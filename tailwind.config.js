@@ -13,6 +13,12 @@ module.exports = {
         seashell: {
           DEFAULT: '#F1F1F1',
         },
+        alabaster: {
+          DEFAULT: '#F9F9F9',
+        },
+        'dull-lavender': {
+          DEFAULT: '#91A8E5',
+        },
       },
     },
   },
