@@ -1,10 +1,12 @@
 import React from 'react';
 // eslint-disable-next-line no-unused-vars
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, ImageBackground, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import DropShadow from 'react-native-drop-shadow';
+import { format } from 'date-fns';
 
-// import IconGray from '../assets/IconGray.svg';
+import BloodDropGray from '../assets/BloodDropGray.png';
+import Clock from '../assets/Clock.png';
 
 function CardResultPending({ entry }) {
   return (
@@ -15,23 +17,41 @@ function CardResultPending({ entry }) {
           width: 0,
           height: 0,
         },
-        shadowOpacity: 1,
+        shadowOpacity: 0.3,
         shadowRadius: 5,
       }}
     >
-      <View className="flex flex-row bg-seashell rounded-3xl my-2">
-        <View className="flex flex-col items-center justify-center pr-5 pt-5 pb-3.5 border-r border-silver">
-          {/* <Image source={IconGray} alt="paramTest.icon" /> */}
-          <View className="text-dark-gray font-bold text-xl pt-3.5">
-            <Text>{entry.localData.testType}</Text>
-          </View>
+      <View className="flex flex-row bg-seashell rounded-3xl my-2 h-40">
+        <View className="w-1/3 flex flex-col items-center justify-center border-r border-dusty-gray">
+          <Image className="h-6" source={BloodDropGray} resizeMode="contain" />
+          <Text className="text-dusty-gray font-bold text-xl mt-2">
+            {entry.localData.testType}
+          </Text>
         </View>
-        <View className="flex flex-col items-center mx-auto pt-5 pb-3.5 pl-3">
-          <View className="text-dark-gray font-medium">
-            <Text>{entry.localData.dateCreated}</Text>
+        <View className="flex flex-col justify-around py-2 h-full w-2/3">
+          <View className="flex flex-row justify-center">
+            <Text className="flex-1 text-center text-dusty-gray text-lg font-medium">
+              {format(entry.localData.dateCreated, 'dd.MM.y k:mm')}
+            </Text>
           </View>
-          <View className="text-2xl pt-8 text-silver-dark">
-            <Text>{entry.localData.status}</Text>
+          <View className="flex flex-row justify-center pb-2">
+            <Image
+              source={Clock}
+              style={[
+                {
+                  width: 75,
+                  height: 75,
+                  marginTop: 10,
+                  marginLeft: -40,
+                  marginRight: -22,
+                },
+              ]}
+            />
+            <View className="text-2xl pt-8 text-silver-dark">
+              <Text className="text-dusty-gray text-2xl">
+                {entry.localData.status}
+              </Text>
+            </View>
           </View>
         </View>
       </View>

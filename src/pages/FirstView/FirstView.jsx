@@ -32,16 +32,22 @@ function PageHeader() {
 export default function FirstView() {
   const navigate = useNavigate();
   const [walletEntries, setWalletEntries] = React.useState([]);
-  const welcomeView = walletEntries.length === 0;
+  const entriesLoaded = React.useRef(false);
+  const welcomeView = entriesLoaded.current && walletEntries.length === 0;
 
   React.useEffect(() => {
     // walletDomain.clear()
     walletDomain.readAll().then((entries) => {
+      entriesLoaded.current = true;
       setWalletEntries(entries);
     });
   }, []);
 
   const onAddTest = () => navigate('/add-test');
+
+  if (!entriesLoaded) {
+    return null;
+  }
 
   if (welcomeView) {
     return (
@@ -55,10 +61,12 @@ export default function FirstView() {
     <PageBase>
       <PageHeader />
       <Button margins="mx-2 mb-4" onPress={onAddTest} title="Add Test" />
-      <ScrollView className="flex flex-col px-2 pt-2 bg-alabaster h-full rounded-t-3xl">
-        {walletEntries.map((entry) => (
-          <CardResultPending entry={entry} key={entry.value} />
-        ))}
+      <ScrollView className="flex flex-col px-2 pt-2 bg-alabaster rounded-t-3xl mb-6">
+        <View className="pb-6">
+          {walletEntries.map((entry) => (
+            <CardResultPending entry={entry} key={entry.value} />
+          ))}
+        </View>
       </ScrollView>
     </PageBase>
   );

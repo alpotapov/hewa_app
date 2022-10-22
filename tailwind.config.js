@@ -19,6 +19,9 @@ module.exports = {
         'dull-lavender': {
           DEFAULT: '#91A8E5',
         },
+        'dusty-gray': {
+          DEFAULT: '#969696',
+        },
       },
     },
   },

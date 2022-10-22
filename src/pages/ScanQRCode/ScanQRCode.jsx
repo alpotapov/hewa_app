@@ -52,7 +52,7 @@ function ScanQRCode() {
           </View>
           <Button
             margins="mx-2 mt-4"
-            onPress={onDeactivateCamera}
+            onPress={() => navigate('/')}
             title="Stop Scanning"
           />
         </View>
