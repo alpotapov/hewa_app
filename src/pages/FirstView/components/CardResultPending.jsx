@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
 import { View, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import DropShadow from 'react-native-drop-shadow';
@@ -18,7 +19,7 @@ function CardResultPending({ entry }) {
         shadowRadius: 5,
       }}
     >
-      <View className="flex flex-row bg-seashell rounded-3xl">
+      <View className="flex flex-row bg-seashell rounded-3xl my-2">
         <View className="flex flex-col items-center justify-center pr-5 pt-5 pb-3.5 border-r border-silver">
           {/* <Image source={IconGray} alt="paramTest.icon" /> */}
           <View className="text-dark-gray font-bold text-xl pt-3.5">
@@ -38,8 +39,10 @@ function CardResultPending({ entry }) {
   );
 }
 
-// CardResultPending.propTypes = {
-//   entry: PropTypes.shape().isRequired,
-// };
+CardResultPending.propTypes = {
+  entry: PropTypes.shape({
+    localData: PropTypes.shape().isRequired,
+  }).isRequired,
+};
 
 export default CardResultPending;
