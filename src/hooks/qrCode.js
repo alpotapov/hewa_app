@@ -7,14 +7,7 @@ export default () => {
 
   const onResult = (qrCodeData) => {
     const entry = JSON.parse(qrCodeData);
-    const parsed = {
-      value: entry.guid,
-      localData: {
-        status: 'Pending',
-        dateCreated: Date.now(),
-        testType: entry.localData.testType,
-      },
-    };
+    const parsed = walletDomain.Wallet.parseEntry(entry);
     setParsedEntry(parsed);
   };
 

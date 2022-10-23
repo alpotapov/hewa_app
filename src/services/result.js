@@ -3,8 +3,8 @@ const checkResults = async (guids) => {
     `https://hewa-service.herokuapp.com/api/v1/result/${guids.join(';')}`
   );
   if (response.ok) {
-    const entries = response.json();
-    return entries;
+    const publishedResults = await response.json();
+    return publishedResults;
   }
 
   throw new Error(response.status);

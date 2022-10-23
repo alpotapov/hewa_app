@@ -54,7 +54,7 @@ const update = async (guid, remoteData) => {
   }
 };
 
-const updateMany = async (guids, remoteData) => {
+const updateMany = async (guids, remoteData, status) => {
   const existingEntries = await read();
   const updatedEntries = existingEntries.map((entry) => {
     const index = guids.indexOf(entry.value);
@@ -64,6 +64,10 @@ const updateMany = async (guids, remoteData) => {
         remoteData: {
           ...entry.remoteData,
           ...remoteData[index],
+        },
+        localData: {
+          ...entry.localData,
+          status,
         },
       };
     }

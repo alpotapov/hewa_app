@@ -8,21 +8,20 @@ export default () => {
   const [walletEntries, setWalletEntries] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  // eslint-disable-next-line no-unused-vars
   // const queryClient = useQueryClient();
-  // eslint-disable-next-line no-unused-vars
-  // const query = useQuery(['wallet'], () => walletDomain.Wallet.checkResults());
+  const { data } = useQuery(['wallet'], () =>
+    walletDomain.Wallet.checkResults(walletEntries.map((entry) => entry.value))
+  );
 
-  // React.useEffect(() => {
-  //   console.log({ query });
-  // }, [query]);
+  React.useEffect(() => {
+    setWalletEntries(data);
+  }, [data]);
 
   React.useEffect(() => {
     const loadWallet = async () => {
       // await walletDomain.clear();
       try {
         const loadedEntries = await walletDomain.Wallet.load();
-        console.log({ loadedEntries });
         setWalletEntries(loadedEntries);
       } catch (e) {
         console.log(e);

@@ -32,8 +32,24 @@ class Wallet {
     await testGuidsRepository.update(guid, remoteData);
   }
 
-  static async updateMany(guids, remoteData) {
-    await testGuidsRepository.updateMany(guids, remoteData);
+  static async updateMany(guids, remoteData, status) {
+    await testGuidsRepository.updateMany(guids, remoteData, status);
+  }
+
+  static parseEntry(entry) {
+    if (!entry.guid || !entry.localData.testType) {
+      throw new Error('Invalid entry');
+    }
+    const parsed = {
+      value: entry.guid,
+      localData: {
+        status: 'Pending',
+        dateCreated: Date.now(),
+        testType: entry.localData.testType,
+      },
+    };
+
+    return parsed;
   }
 
   static async checkResults() {
@@ -44,21 +60,32 @@ class Wallet {
     const guids = entriesToCheck.map((entry) => entry.value);
     const guidsString = guids.join(',');
 
-    console.log({ guidsString });
     if (guidsString === '') return walletEntries;
     try {
-      const entries = await resultService.checkResults(guids);
+      const publishedResults = await resultService.checkResults(guids);
+
+      const guidsWithUpdates = publishedResults.reduce(
+        (acc, result, index) => {
+          if (result !== '') {
+            acc.guids.push(guids[index]);
+            acc.results.push(result);
+          }
+          return acc;
+        },
+        { guids: [], results: [] }
+      );
+
       await Wallet.updateMany(
-        guids,
-        entries.map((entry) => entry.remoteData)
+        guidsWithUpdates.guids,
+        guidsWithUpdates.results.map((result) => ({ remoteData: { result } })),
+        'ResultReceived'
       );
       const updatedEntries = await Wallet.load();
       return updatedEntries;
     } catch (error) {
       console.error(error);
+      return walletEntries;
     }
-
-    return walletEntries;
   }
 }
 
