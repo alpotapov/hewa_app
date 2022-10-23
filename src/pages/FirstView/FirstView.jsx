@@ -6,10 +6,10 @@ import { View, Image, TouchableOpacity, Text, ScrollView } from 'react-native';
 import PageBase from '../PageBase/PageBase';
 import WelcomeView from './components/WelcomeView';
 import CardResultPending from './components/CardResultPending';
-import walletDomain from '../../domain/wallet';
 
 import MedicalRecord from './assets/MedicalRecord.png';
 import Button from '../../components/Button/Button';
+import useWallet from '../../hooks/wallet';
 
 // eslint-disable-next-line react/prop-types
 function PageHeader() {
@@ -31,21 +31,13 @@ function PageHeader() {
 
 export default function FirstView() {
   const navigate = useNavigate();
-  const [walletEntries, setWalletEntries] = React.useState([]);
-  const entriesLoaded = React.useRef(false);
-  const welcomeView = entriesLoaded.current && walletEntries.length === 0;
 
-  React.useEffect(() => {
-    // walletDomain.clear()
-    walletDomain.readAll().then((entries) => {
-      entriesLoaded.current = true;
-      setWalletEntries(entries);
-    });
-  }, []);
+  const { walletEntries, isLoading } = useWallet();
+  const welcomeView = !isLoading && walletEntries.length === 0;
 
   const onAddTest = () => navigate('/add-test');
 
-  if (!entriesLoaded) {
+  if (isLoading) {
     return null;
   }
 
