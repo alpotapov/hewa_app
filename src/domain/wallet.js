@@ -28,10 +28,6 @@ class Wallet {
     await testGuidsRepository.save(formattedEntry);
   }
 
-  static async update(guid, remoteData) {
-    await testGuidsRepository.update(guid, remoteData);
-  }
-
   static async updateMany(guids, remoteData, status) {
     await testGuidsRepository.updateMany(guids, remoteData, status);
   }

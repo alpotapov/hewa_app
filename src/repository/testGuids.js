@@ -31,29 +31,6 @@ const save = async (guid) => {
   );
 };
 
-const update = async (guid, remoteData) => {
-  const existingGuids = await read();
-  const updatedGuids = existingGuids.map((entry) => {
-    if (entry.value === guid) {
-      return {
-        ...entry,
-        remoteData: {
-          ...entry.remoteData,
-          ...remoteData,
-        },
-      };
-    }
-    return entry;
-  });
-
-  try {
-    await AsyncStorage.setItem('guidList', JSON.stringify(updatedGuids));
-  } catch (e) {
-    console.error(e);
-    throw e;
-  }
-};
-
 const updateMany = async (guids, remoteData, status) => {
   const existingEntries = await read();
   const updatedEntries = existingEntries.map((entry) => {
@@ -63,7 +40,7 @@ const updateMany = async (guids, remoteData, status) => {
         ...entry,
         remoteData: {
           ...entry.remoteData,
-          ...remoteData[index],
+          ...remoteData[index].remoteData,
         },
         localData: {
           ...entry.localData,
@@ -99,7 +76,6 @@ const clear = async () => {
 
 export default {
   save,
-  update,
   updateMany,
   read,
   count,

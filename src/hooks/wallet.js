@@ -9,9 +9,7 @@ export default () => {
   const [isLoading, setIsLoading] = React.useState(true);
 
   // const queryClient = useQueryClient();
-  const { data } = useQuery(['wallet'], () =>
-    walletDomain.Wallet.checkResults(walletEntries.map((entry) => entry.value))
-  );
+  const { data } = useQuery(['wallet'], walletDomain.Wallet.checkResults);
 
   React.useEffect(() => {
     setWalletEntries(data);
@@ -24,7 +22,7 @@ export default () => {
         const loadedEntries = await walletDomain.Wallet.load();
         setWalletEntries(loadedEntries);
       } catch (e) {
-        console.log(e);
+        console.error(e);
       } finally {
         setIsLoading(false);
       }

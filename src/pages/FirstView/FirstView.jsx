@@ -6,6 +6,7 @@ import { View, Image, TouchableOpacity, Text, ScrollView } from 'react-native';
 import PageBase from '../PageBase/PageBase';
 import WelcomeView from './components/WelcomeView';
 import CardResultPending from './components/CardResultPending';
+import CardResultReceived from './components/CardResultReceived';
 
 import MedicalRecord from './assets/MedicalRecord.png';
 import Button from '../../components/Button/Button';
@@ -55,9 +56,12 @@ export default function FirstView() {
       <Button margins="mx-2 mb-4" onPress={onAddTest} title="Add Test" />
       <ScrollView className="flex flex-col px-2 pt-2 bg-alabaster rounded-t-3xl mb-6">
         <View className="pb-6">
-          {walletEntries.map((entry) => (
-            <CardResultPending entry={entry} key={entry.value} />
-          ))}
+          {walletEntries.map((entry) => {
+            if (entry.localData.status === 'Pending') {
+              return <CardResultPending entry={entry} key={entry.value} />;
+            }
+            return <CardResultReceived entry={entry} key={entry.value} />;
+          })}
         </View>
       </ScrollView>
     </PageBase>
