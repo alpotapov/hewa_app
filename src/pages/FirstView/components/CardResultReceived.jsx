@@ -32,12 +32,10 @@ function CardResultReceived({ entry }) {
               {format(entry.localData.dateCreated, 'dd.MM.y k:mm')}
             </Text>
           </View>
-          <View className="flex flex-row justify-center pb-2">
-            <View className="text-2xl pt-8 text-silver-dark">
-              <Text className="amaranth text-2xl">
-                {entry.remoteData.result}
-              </Text>
-            </View>
+          <View className="flex-1 flex flex-row justify-center items-center pb-2">
+            <Text className="text-4xl font-bold text-center">
+              {entry.remoteData.result}
+            </Text>
           </View>
         </View>
       </View>
