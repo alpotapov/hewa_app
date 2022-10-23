@@ -2,39 +2,33 @@ import React from 'react';
 import { Text, View, Image } from 'react-native';
 import { useNavigate } from 'react-router-native';
 
-import walletDomain from '../../domain/wallet';
+import useQrCode from '../../hooks/qrCode';
 
 import PageBase from '../PageBase/PageBase';
 import CameraContainer from './components/CameraContainer';
+import ResultView from './components/ResultView';
 import Button from '../../components/Button/Button';
 
 import AddImage from './assets/AddImage.png';
 
 function ScanQRCode() {
   const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
-  const [cameraActive, setCameraActive] = React.useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const onActivateCamera = () => {
-    setCameraActive(true);
+  const { onResult, parsedEntry, resetResult, saveResult } = useQrCode();
+
+  const onAfterSave = () => {
+    navigate('/');
   };
-  const onDeactivateCamera = () => {
-    setCameraActive(false);
-  };
-  const onResult = (guid) => {
-    walletDomain.handleInput(guid).then((output) => {
-      if (output === 0) {
-        navigate('/');
-      } else if (output === 1) {
-        // eslint-disable-next-line no-undef
-        alert('This test is already in your HealthWallet');
-      } else {
-        // eslint-disable-next-line no-undef
-        alert(`An error occured. Code ${output}`);
-      }
-    });
-    onDeactivateCamera();
-  };
+
+  if (parsedEntry) {
+    return (
+      <ResultView
+        entry={parsedEntry}
+        resetResult={resetResult}
+        saveResult={() => saveResult(onAfterSave)}
+      />
+    );
+  }
+
   return (
     <PageBase footer>
       <View className="relative z-10 flex flex-row -mb-8">

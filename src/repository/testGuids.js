@@ -23,18 +23,12 @@ const save = async (guid) => {
   const existingGuids = await read();
   const alreadyExists = await exists(guid);
   if (alreadyExists) {
-    return 1;
+    throw new Error('Entry with guid already exists');
   }
-  try {
-    await AsyncStorage.setItem(
-      'guidList',
-      JSON.stringify([guid, ...existingGuids])
-    );
-    return 0;
-  } catch (e) {
-    console.error(e);
-    return 2;
-  }
+  await AsyncStorage.setItem(
+    'guidList',
+    JSON.stringify([guid, ...existingGuids])
+  );
 };
 
 const update = async (guid, remoteData) => {
@@ -60,6 +54,30 @@ const update = async (guid, remoteData) => {
   }
 };
 
+const updateMany = async (guids, remoteData) => {
+  const existingEntries = await read();
+  const updatedEntries = existingEntries.map((entry) => {
+    const index = guids.indexOf(entry.value);
+    if (index >= 0) {
+      return {
+        ...entry,
+        remoteData: {
+          ...entry.remoteData,
+          ...remoteData[index],
+        },
+      };
+    }
+    return entry;
+  });
+
+  try {
+    await AsyncStorage.setItem('guidList', JSON.stringify(updatedEntries));
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
 const count = async () => {
   const existingGuids = await read();
   return existingGuids.length;
@@ -78,6 +96,7 @@ const clear = async () => {
 export default {
   save,
   update,
+  updateMany,
   read,
   count,
   clear,

@@ -7,8 +7,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import FirstView from './src/pages/FirstView/FirstView';
 import ScanQRCode from './src/pages/ScanQRCode/ScanQRCode';
-import Backup from './src/pages/Backup/Backup';
-import CreateWallet from './src/pages/CreateWallet/CreateWallet';
+// import Backup from './src/pages/Backup/Backup';
+// import CreateWallet from './src/pages/CreateWallet/CreateWallet';
 
 const queryClient = new QueryClient();
 
@@ -18,8 +18,8 @@ export default function App() {
       <NativeRouter>
         <View className="pt-6">
           <Routes>
-            <Route path="/create-wallet" element={<CreateWallet />} />
-            <Route path="/backup" element={<Backup />} />
+            {/* <Route path="/create-wallet" element={<CreateWallet />} /> */}
+            {/* <Route path="/backup" element={<Backup />} /> */}
             <Route path="/add-test" element={<ScanQRCode />} />
             <Route path="/" element={<FirstView />} />
           </Routes>

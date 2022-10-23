@@ -1,6 +1,8 @@
 import 'react-native-get-random-values';
 import 'node-libs-expo/globals';
+// eslint-disable-next-line no-unused-vars
 import crypto from 'msrcrypto';
+// eslint-disable-next-line no-unused-vars
 import { TextEncoder, TextDecoder } from 'fastestsmallesttextencoderdecoder';
 import LitJsSDK, { LitNodeClient } from 'lit-js-sdk-no-wasm';
 import '../../shim';
@@ -10,34 +12,57 @@ import 'text-encoding-polyfill';
 import { ethers } from 'ethers';
 import testGuidsRepository from '../repository/testGuids';
 import secretsRepository from '../repository/secrets';
+import resultService from '../services/result';
 
-const createFromGuid = (guid) => {
-  return {
-    value: guid,
-    localData: {
-      testType: 'B16',
-      dateCreated: Date.now(),
-      status: 'Pending',
-    },
-  };
-};
+class Wallet {
+  static async load() {
+    const walletEntries = await testGuidsRepository.read();
+    return walletEntries;
+  }
 
-const validateGuid = (guid) => {
-  return true;
-};
+  static async save(formattedEntry) {
+    const { value: guid } = formattedEntry;
 
-const handleInput = async (guid) => {
-  // return codes:
-  // - 0 : ok
-  // - 1 : entry already exists
-  // - 2 : saving error
+    if (!guid) throw new Error('No guid provided');
 
-  // const isValid = validateGuid(guid);
-  const newEntry = createFromGuid(guid);
-  const result = await testGuidsRepository.save(newEntry);
+    await testGuidsRepository.save(formattedEntry);
+  }
 
-  return result;
-};
+  static async update(guid, remoteData) {
+    await testGuidsRepository.update(guid, remoteData);
+  }
+
+  static async updateMany(guids, remoteData) {
+    await testGuidsRepository.updateMany(guids, remoteData);
+  }
+
+  static async checkResults() {
+    const walletEntries = await Wallet.load();
+    const entriesToCheck = walletEntries.filter((entry) =>
+      Wallet.statusesToCheck.includes(entry.localData.status)
+    );
+    const guids = entriesToCheck.map((entry) => entry.value);
+    const guidsString = guids.join(',');
+
+    console.log({ guidsString });
+    if (guidsString === '') return walletEntries;
+    try {
+      const entries = await resultService.checkResults(guids);
+      await Wallet.updateMany(
+        guids,
+        entries.map((entry) => entry.remoteData)
+      );
+      const updatedEntries = await Wallet.load();
+      return updatedEntries;
+    } catch (error) {
+      console.error(error);
+    }
+
+    return walletEntries;
+  }
+}
+
+Wallet.statusesToCheck = ['Pending', 'Analyzing'];
 
 const readAll = async () => {
   const guids = await testGuidsRepository.read();
@@ -61,6 +86,8 @@ const loadWallet = async () => {
     const wallet = new ethers.Wallet(pk);
     return wallet;
   }
+
+  return null;
 };
 
 const encryptWithLit = async (data, dataAccessTokenId) => {
@@ -105,10 +132,10 @@ const exportEncryptedBackup = async () => {
 
 export default {
   readAll,
-  handleInput,
   clear: testGuidsRepository.clear,
   exportAsJSONString,
   createWallet,
   loadWallet,
   exportEncryptedBackup,
+  Wallet,
 };

@@ -1,52 +1,17 @@
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
 import { useQueryClient, useQuery } from '@tanstack/react-query';
-import resultService from '../services/result';
-import testGuidsRepository from '../repository/testGuids';
 
-class Wallet {
-  static async load() {
-    const walletEntries = await testGuidsRepository.read();
-    return walletEntries;
-  }
-
-  static async update(guid, remoteData) {
-    await testGuidsRepository.update(guid, remoteData);
-  }
-
-  static async checkResults() {
-    const walletEntries = await Wallet.load();
-    const entriesToCheck = walletEntries.filter((entry) =>
-      Wallet.statusesToCheck.includes(entry.localData.status)
-    );
-    const guids = entriesToCheck.map((entry) => entry.value);
-
-    console.log({ guids: `${guids.join(';')}` });
-    try {
-      const entries = await resultService.checkResults(guids);
-      await Wallet.updateMany(
-        guids,
-        entries.map((entry) => entry.remoteData)
-      );
-      const updatedEntries = await Wallet.load();
-      return updatedEntries;
-    } catch (error) {
-      console.error(error);
-    }
-
-    return walletEntries;
-  }
-}
-
-Wallet.statusesToCheck = ['Pending', 'Analyzing'];
+import walletDomain from '../domain/wallet';
 
 export default () => {
   const [walletEntries, setWalletEntries] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
   // eslint-disable-next-line no-unused-vars
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   // eslint-disable-next-line no-unused-vars
-  const query = useQuery(['wallet'], () => Wallet.checkResults());
+  // const query = useQuery(['wallet'], () => walletDomain.Wallet.checkResults());
 
   // React.useEffect(() => {
   //   console.log({ query });
@@ -54,8 +19,9 @@ export default () => {
 
   React.useEffect(() => {
     const loadWallet = async () => {
+      // await walletDomain.clear();
       try {
-        const loadedEntries = await Wallet.load();
+        const loadedEntries = await walletDomain.Wallet.load();
         console.log({ loadedEntries });
         setWalletEntries(loadedEntries);
       } catch (e) {
