@@ -33,8 +33,11 @@ function CardResultReceived({ entry }) {
             </Text>
           </View>
           <View className="flex-1 flex flex-row justify-center items-center pb-2">
-            <Text className="text-4xl font-bold text-center">
-              {entry.remoteData.result}
+            <Text className="text-center">
+              <Text className="text-4xl font-bold">
+                {entry.remoteData.result}
+              </Text>
+              <Text className="text-2xl"> Ug/L</Text>
             </Text>
           </View>
         </View>

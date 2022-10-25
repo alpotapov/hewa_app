@@ -9,7 +9,9 @@ export default () => {
   const [isLoading, setIsLoading] = React.useState(true);
 
   // const queryClient = useQueryClient();
-  const { data } = useQuery(['wallet'], walletDomain.Wallet.checkResults);
+  const { data } = useQuery(['wallet'], walletDomain.Wallet.checkResults, {
+    refetchInterval: 10000,
+  });
 
   React.useEffect(() => {
     setWalletEntries(data);
