@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-native';
-import { View, Image, Text, ScrollView } from 'react-native';
+import { View, Image, Text, ScrollView, RefreshControl } from 'react-native';
 
 import PageBase from '../PageBase/PageBase';
 import WelcomeView from './components/WelcomeView';
@@ -32,7 +32,7 @@ function PageHeader() {
 export default function FirstView() {
   const navigate = useNavigate();
 
-  const { walletEntries, isLoading } = useWallet();
+  const { walletEntries, isLoading, refetch } = useWallet();
   const welcomeView = !isLoading && walletEntries.length === 0;
 
   const onAddTest = () => navigate('/add-test');
@@ -53,7 +53,12 @@ export default function FirstView() {
     <PageBase>
       <PageHeader />
       <Button margins="mx-2 mb-4" onPress={onAddTest} title="Add Test" />
-      <ScrollView className="flex flex-col px-2 pt-2 bg-alabaster rounded-t-3xl mb-6">
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={refetch} />
+        }
+        className="flex flex-col px-2 pt-2 bg-alabaster rounded-t-3xl mb-6"
+      >
         <View className="pb-6">
           {walletEntries.map((entry) => {
             if (entry.localData.status === 'Pending') {

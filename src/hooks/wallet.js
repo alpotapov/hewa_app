@@ -8,9 +8,10 @@ export default () => {
   const [isLoading, setIsLoading] = React.useState(true);
 
   // const queryClient = useQueryClient();
-  const { data } = useQuery(['wallet'], walletDomain.Wallet.checkResults, {
-    refetchInterval: 60000,
-  });
+  const { data, refetch } = useQuery(
+    ['wallet'],
+    walletDomain.Wallet.checkResults
+  );
 
   React.useEffect(() => {
     setWalletEntries(data);
@@ -32,5 +33,5 @@ export default () => {
     loadWallet();
   }, []);
 
-  return { walletEntries, isLoading };
+  return { walletEntries, isLoading, refetch };
 };

@@ -16,20 +16,22 @@ Notifications.setNotificationHandler({
     shouldShowAlert: true,
     shouldPlaySound: false,
     shouldSetBadge: false,
-  })
+  }),
 });
 
 export default function App() {
   const handleNotification = (notification) => {
     console.log(JSON.stringify(notification, null, 2));
-  }
+  };
   const handleNotificationResponse = (response) => {
     console.log(JSON.stringify(response, null, 2));
-  }
+  };
 
   React.useEffect(() => {
     Notifications.addNotificationReceivedListener(handleNotification);
-    Notifications.addNotificationResponseReceivedListener(handleNotificationResponse);
+    Notifications.addNotificationResponseReceivedListener(
+      handleNotificationResponse
+    );
   }, []);
   return (
     <QueryClientProvider client={queryClient}>
