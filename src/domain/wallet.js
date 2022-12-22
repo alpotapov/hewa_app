@@ -1,19 +1,28 @@
 import 'react-native-get-random-values';
 import 'node-libs-expo/globals';
-// eslint-disable-next-line no-unused-vars
-import crypto from 'msrcrypto';
-// eslint-disable-next-line no-unused-vars
-import { TextEncoder, TextDecoder } from 'fastestsmallesttextencoderdecoder';
-import LitJsSDK, { LitNodeClient } from 'lit-js-sdk-no-wasm';
-import '../../shim';
 import '@ethersproject/shims';
-import 'text-encoding-polyfill';
 
-import { ethers } from 'ethers';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+
 import testGuidsRepository from '../repository/testGuids';
-import secretsRepository from '../repository/secrets';
 import resultService from '../services/result';
 
+const generateExpoPushToken = async () => {
+  if (Device.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      if (status !== 'granted') {
+        alert('Failed to get push token for push notification!');
+        return;
+      }
+    }
+    const token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+    return token;
+  }
+}
 class Wallet {
   static async load() {
     const walletEntries = await testGuidsRepository.read();
@@ -26,6 +35,13 @@ class Wallet {
     if (!guid) throw new Error('No guid provided');
 
     await testGuidsRepository.save(formattedEntry);
+
+    generateExpoPushToken()
+      .then((pushToken) => testGuidsRepository.setPushToken(guid, pushToken))
+      .then(() => testGuidsRepository.get(guid))
+      .then((entry) => {
+        resultService.subscribeToResult(guid, entry.localData.pushToken);
+      });
   }
 
   static async updateMany(guids, remoteData, status) {
@@ -42,6 +58,7 @@ class Wallet {
         status: 'Pending',
         dateCreated: Date.now(),
         testType: entry.localData.testType,
+        code: entry.localData.code,
       },
     };
 
@@ -49,6 +66,7 @@ class Wallet {
   }
 
   static async checkResults() {
+    console.log('Checking results');
     const walletEntries = await Wallet.load();
     const entriesToCheck = walletEntries.filter((entry) =>
       Wallet.statusesToCheck.includes(entry.localData.status)
@@ -87,78 +105,7 @@ class Wallet {
 
 Wallet.statusesToCheck = ['Pending', 'Analyzing'];
 
-const readAll = async () => {
-  const guids = await testGuidsRepository.read();
-  return guids;
-};
-
-const exportAsJSONString = async () => {
-  const guids = await readAll();
-  return JSON.stringify(guids);
-};
-
-const createWallet = async () => {
-  const wallet = ethers.Wallet.createRandom();
-  console.log({ wallet });
-  await secretsRepository.savePrivateKey(wallet.privateKey);
-};
-
-const loadWallet = async () => {
-  const pk = await secretsRepository.readPrivateKey();
-  if (pk) {
-    const wallet = new ethers.Wallet(pk);
-    return wallet;
-  }
-
-  return null;
-};
-
-const encryptWithLit = async (data, dataAccessTokenId) => {
-  const chain = 'ethereum';
-  const accessControlConditions = [
-    {
-      contractAddress: '',
-      standardContractType: 'ERC721',
-      chain,
-      method: 'ownerOf',
-      parameters: [dataAccessTokenId],
-      returnValueTest: {
-        comparator: '=',
-        value: ':userAddress',
-      },
-    },
-  ];
-  const authSig = await LitJsSDK.checkAndSignAuthMessage({ chain });
-  const { encryptedString, symmetricKey } = await LitJsSDK.encryptString(data);
-  const encryptedSymmetricKey = await LitNodeClient.saveEncryptionKey({
-    accessControlConditions,
-    symmetricKey,
-    authSig,
-    chain,
-  });
-
-  const packagedData = JSON.stringify({
-    encryptedString,
-    encryptedSymmetricKey,
-    accessControlConditions,
-  });
-
-  return packagedData;
-};
-
-const exportEncryptedBackup = async () => {
-  const data = await exportAsJSONString();
-  console.log({ data });
-  const encrypted = await encryptWithLit(data);
-  return encrypted;
-};
-
 export default {
-  readAll,
   clear: testGuidsRepository.clear,
-  exportAsJSONString,
-  createWallet,
-  loadWallet,
-  exportEncryptedBackup,
   Wallet,
 };

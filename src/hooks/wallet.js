@@ -1,6 +1,5 @@
 import React from 'react';
-// eslint-disable-next-line no-unused-vars
-import { useQueryClient, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import walletDomain from '../domain/wallet';
 
@@ -10,7 +9,7 @@ export default () => {
 
   // const queryClient = useQueryClient();
   const { data } = useQuery(['wallet'], walletDomain.Wallet.checkResults, {
-    refetchInterval: 10000,
+    refetchInterval: 60000,
   });
 
   React.useEffect(() => {
@@ -22,6 +21,7 @@ export default () => {
       // await walletDomain.clear();
       try {
         const loadedEntries = await walletDomain.Wallet.load();
+        console.log(JSON.stringify(loadedEntries, null, 2));
         setWalletEntries(loadedEntries);
       } catch (e) {
         console.error(e);

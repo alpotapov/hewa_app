@@ -31,6 +31,24 @@ const save = async (guid) => {
   );
 };
 
+const setPushToken = async (guid, pushToken) => {
+  const existingEntries = await read();
+  const updatedEntries = existingEntries.map((entry) => {
+    if (entry.value === guid) {
+      return {
+        ...entry,
+        localData: {
+          ...entry.localData,
+          pushToken: pushToken.toString(),
+        }
+      };
+    }
+    return entry;
+  });
+
+  await AsyncStorage.setItem('guidList', JSON.stringify(updatedEntries));
+}
+
 const updateMany = async (guids, remoteData, status) => {
   const existingEntries = await read();
   const updatedEntries = existingEntries.map((entry) => {
@@ -74,10 +92,18 @@ const clear = async () => {
   }
 };
 
+const get = async (guid) => {
+  const existingGuids = await read();
+  const matching = existingGuids.find((entry) => entry.value === guid);
+  return matching;
+}
+
 export default {
   save,
+  setPushToken,
   updateMany,
   read,
   count,
   clear,
+  get,
 };
