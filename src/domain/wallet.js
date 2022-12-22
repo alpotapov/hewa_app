@@ -10,19 +10,20 @@ import resultService from '../services/result';
 
 const generateExpoPushToken = async () => {
   if (Device.isDevice) {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
     if (existingStatus !== 'granted') {
       const { status } = await Notifications.requestPermissionsAsync();
       if (status !== 'granted') {
-        alert('Failed to get push token for push notification!');
-        return;
+        throw new Error('Failed to get push token');
       }
     }
     const token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
     return token;
   }
-}
+
+  throw new Error('Not a mobile device');
+};
 class Wallet {
   static async load() {
     const walletEntries = await testGuidsRepository.read();

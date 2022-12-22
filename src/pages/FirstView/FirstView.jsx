@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-native';
-// eslint-disable-next-line no-unused-vars
-import { View, Image, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { View, Image, Text, ScrollView } from 'react-native';
 
 import PageBase from '../PageBase/PageBase';
 import WelcomeView from './components/WelcomeView';
