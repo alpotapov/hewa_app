@@ -1,33 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-native';
-import { View, Image, Text, ScrollView, RefreshControl } from 'react-native';
+import { View, ScrollView, RefreshControl } from 'react-native';
+import * as Notifications from 'expo-notifications';
 
 import PageBase from '../PageBase/PageBase';
+import PageHeader from './components/PageHeader';
 import WelcomeView from './components/WelcomeView';
 import CardResultPending from './components/CardResultPending';
 import CardResultReceived from './components/CardResultReceived';
 
-import MedicalRecord from './assets/MedicalRecord.png';
 import Button from '../../components/Button/Button';
 import useWallet from '../../hooks/wallet';
 
-// eslint-disable-next-line react/prop-types
-function PageHeader() {
-  return (
-    <View className="relative z-10 flex flex-row">
-      <Image
-        className="h-36 w-36"
-        resizeMode="contain"
-        source={MedicalRecord}
-      />
-      <View className="mt-4">
-        <Text className="text-5xl font-bold">
-          <Text className="text-dull-lavender">Test{'\r\n'}</Text>Results
-        </Text>
-      </View>
-    </View>
-  );
-}
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function FirstView() {
   const navigate = useNavigate();
@@ -36,6 +27,21 @@ export default function FirstView() {
   const welcomeView = !isLoading && walletEntries.length === 0;
 
   const onAddTest = () => navigate('/add-test');
+
+  const handleNotification = (notification) => {
+    console.log(JSON.stringify(notification, null, 2));
+    refetch();
+  };
+  const handleNotificationResponse = (response) => {
+    console.log(JSON.stringify(response, null, 2));
+  };
+
+  React.useEffect(() => {
+    Notifications.addNotificationReceivedListener(handleNotification);
+    Notifications.addNotificationResponseReceivedListener(
+      handleNotificationResponse
+    );
+  }, []);
 
   if (isLoading) {
     return null;
