@@ -34,6 +34,7 @@ export default function FirstView() {
   };
   const handleNotificationResponse = (response) => {
     console.log(JSON.stringify(response, null, 2));
+    refetch();
   };
 
   React.useEffect(() => {
