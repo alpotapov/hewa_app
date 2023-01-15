@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "hewa_app",
-    "slug": "healthwallet",
+    "name": "Health Drive",
+    "slug": "healthdrive",
     "owner": "alpotapov",
     "version": "1.0.1",
     "orientation": "portrait",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#C2E9EC"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,7 +18,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "tech.phyle.healthwallet"
+      "bundleIdentifier": "tech.healthdrive"
     },
     "android": {
       "adaptiveIcon": {
