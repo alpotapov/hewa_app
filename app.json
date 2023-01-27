@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Health Drive",
+    "name": "HealthDrive",
     "slug": "healthdrive",
     "owner": "alpotapov",
     "version": "1.0.1",
@@ -31,7 +31,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "aeeaa81d-2b72-4b3b-9fb7-b8e1ce7d3ea2"
+        "projectId": "753dfb14-b702-470b-a9cb-f6e29dff57d5"
       }
     },
     "plugins": [

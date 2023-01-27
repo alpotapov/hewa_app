@@ -50,16 +50,15 @@ class Wallet {
   }
 
   static parseEntry(entry) {
-    if (!entry.guid || !entry.localData.testType) {
+    if (!entry.uuid || !entry.testType) {
       throw new Error('Invalid entry');
     }
     const parsed = {
-      value: entry.guid,
+      value: entry.uuid,
       localData: {
         status: 'Pending',
         dateCreated: Date.now(),
-        testType: entry.localData.testType,
-        code: entry.localData.code,
+        testType: entry.testType,
       },
     };
 
