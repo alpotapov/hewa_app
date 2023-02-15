@@ -80,9 +80,12 @@ class Wallet {
 
       const guidsWithUpdates = publishedResults.reduce(
         (acc, result, index) => {
-          if (result !== '') {
-            acc.guids.push(guids[index]);
-            acc.results.push(result);
+          if (result !== {}) {
+            if (guids[index] !== result.id) {
+              return acc;
+            }
+            acc.guids.push(result.id);
+            acc.results.push(result.valueQuantity.value);
           }
           return acc;
         },
