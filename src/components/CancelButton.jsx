@@ -12,7 +12,7 @@ function CancelButton({ onPress, title, margins }) {
     >
       <View className="flex flex-row justify-between items-center h-14">
         <Image className="flex-none w-6 h-6" source={CancelIcon} />
-        <Text className="flex-1 text-white text-center font-bold">{title}</Text>
+        <Text className="flex-1 text-gray text-center font-bold">{title}</Text>
       </View>
     </TouchableOpacity>
   );

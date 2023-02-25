@@ -28,6 +28,9 @@ module.exports = {
         mercury: {
           DEFAULT: '#E3E3E3',
         },
+        gray: {
+          DEFAULT: '#8F8F8F',
+        },
       },
     },
   },
