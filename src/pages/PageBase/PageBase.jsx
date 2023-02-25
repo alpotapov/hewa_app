@@ -33,8 +33,8 @@ function BackButton({ navigate, backLink }) {
 
 const styles = StyleSheet.create({
   logo: {
-    width: 130,
-    height: 28,
+    width: 115,
+    height: 44,
   },
 });
 

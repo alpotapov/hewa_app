@@ -21,13 +21,13 @@ export default function WelcomeView({ onAddTest }) {
         </View>
         <View className="w-46 mb-8">
           <Text className="text-5xl font-bold text-amaranth">
-            Your{'\r\n'}Medical{'\r\n'}
-            <Text className="text-black">Records</Text>
+            Your{'\r\n'}Test{'\r\n'}
+            <Text className="text-black">Results</Text>
           </Text>
         </View>
       </View>
       <TouchableOpacity
-        className="bg-cornflower rounded-lg px-6"
+        className="bg-pacific-blue rounded-2xl px-6"
         onPress={onAddTest}
       >
         <View className="flex flex-row justify-between items-center h-14">

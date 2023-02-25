@@ -10,6 +10,9 @@ module.exports = {
         cornflower: {
           DEFAULT: '#9BB0E9',
         },
+        'pacific-blue': {
+          DEFAULT: '#00AEC1',
+        },
         seashell: {
           DEFAULT: '#F1F1F1',
         },
