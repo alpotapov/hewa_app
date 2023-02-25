@@ -29,7 +29,7 @@ function CardResultReceived({ entry }) {
         <View className="flex flex-col justify-around py-2 h-full w-2/3">
           <View className="flex flex-row justify-center">
             <Text className="flex-1 text-center text-amaranth text-lg font-medium">
-              {format(entry.localData.dateCreated, 'dd.MM.y k:mm')}
+              {format(entry.localData.dateCreated, 'dd.MM.y HH:mm')}
             </Text>
           </View>
           <View className="flex-1 flex flex-row justify-center items-center pb-2">

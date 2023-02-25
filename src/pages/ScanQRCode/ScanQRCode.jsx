@@ -40,7 +40,7 @@ function ScanQRCode() {
         </View>
       </View>
       <View className="bg-alabaster h-full rounded-t-3xl">
-        <View className="flex flex-col justify-center space-y-4 mt-10 p-6">
+        <View className="flex flex-col justify-center mt-10 p-6">
           <View className="flex items-center w-full h-64 px-2">
             <CameraContainer onResult={onResult} />
           </View>
