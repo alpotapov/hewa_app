@@ -25,6 +25,9 @@ module.exports = {
         'dusty-gray': {
           DEFAULT: '#969696',
         },
+        mercury: {
+          DEFAULT: '#E3E3E3',
+        },
       },
     },
   },

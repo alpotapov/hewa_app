@@ -7,7 +7,7 @@ function Button({ onPress, title, icon, margins }) {
     return (
       <TouchableOpacity
         onPress={onPress}
-        className={`bg-cornflower rounded-lg ${margins}`}
+        className={`bg-pacific-blue rounded-2xl ${margins}`}
       >
         <View className="flex flex-row justify-between items-center h-14">
           <Text className="flex-1 text-white text-center font-bold">
@@ -20,7 +20,7 @@ function Button({ onPress, title, icon, margins }) {
 
   return (
     <TouchableOpacity
-      className={`bg-cornflower rounded-lg ${margins}`}
+      className={`bg-pacific-blue rounded-2xl ${margins}`}
       onPress={onPress}
     >
       <View className="flex flex-row justify-between items-center h-14">

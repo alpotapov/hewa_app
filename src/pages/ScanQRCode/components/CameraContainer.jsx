@@ -19,13 +19,20 @@ function CameraContainer({ onResult }) {
   };
 
   if (!permission) {
-    return <View />;
-  }
-  if (!permission.granted) {
     return (
       <View>
         <Text style={{ textAlign: 'center' }}>
-          We need your permission to show the camera
+          We need your permission to use the camera. Go into Settings to allow
+          it.
+        </Text>
+      </View>
+    );
+  }
+  if (!permission.granted) {
+    return (
+      <View className="mt-24">
+        <Text style={{ textAlign: 'center', marginBottom: 16 }}>
+          We need your permission to use the camera
         </Text>
         <Button onPress={requestPermission} title="Grant Permission" />
       </View>

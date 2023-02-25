@@ -7,7 +7,7 @@ import useQrCode from '../../hooks/qrCode';
 import PageBase from '../PageBase/PageBase';
 import CameraContainer from './components/CameraContainer';
 import ResultView from './components/ResultView';
-import Button from '../../components/Button/Button';
+import CancelButton from '../../components/CancelButton';
 
 import AddImage from './assets/AddImage.png';
 
@@ -35,16 +35,16 @@ function ScanQRCode() {
         <Image className="w-52 -ml-4" source={AddImage} />
         <View className="w-36 mt-8">
           <Text className="text-3xl font-bold">
-            <Text className="text-dull-lavender">Scan{'\r\n'}</Text>QR Code
+            <Text className="text-pacific-blue">Scan{'\r\n'}</Text>QR Code
           </Text>
         </View>
       </View>
       <View className="bg-alabaster h-full rounded-t-3xl">
-        <View className="flex flex-col justify-center space-y-4 mt-10">
+        <View className="flex flex-col justify-center space-y-4 mt-10 p-6">
           <View className="flex items-center w-full h-64 px-2">
             <CameraContainer onResult={onResult} />
           </View>
-          <Button
+          <CancelButton
             margins="mx-2 mt-4"
             onPress={() => navigate('/')}
             title="Stop Scanning"
