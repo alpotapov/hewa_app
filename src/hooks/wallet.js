@@ -33,5 +33,5 @@ export default () => {
     loadWallet();
   }, []);
 
-  return { walletEntries, isLoading, refetch };
+  return { walletEntries, isLoading, refetch, clear: walletDomain.clear };
 };

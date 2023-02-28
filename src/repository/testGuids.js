@@ -83,6 +83,7 @@ const count = async () => {
 };
 
 const clear = async () => {
+  console.warn('Clearing data');
   const keysToRemove = ['guidList'];
   try {
     await AsyncStorage.multiRemove(keysToRemove);

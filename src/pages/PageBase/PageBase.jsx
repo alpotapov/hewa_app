@@ -1,24 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line no-unused-vars
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { useNavigate } from 'react-router-native';
 
+// import Menu from './components/Menu';
+import useWallet from '../../hooks/wallet';
+
 import Logo from './assets/Logo.png';
-// import MenuIcon from './assets/Menu.png';
+import MenuIcon from './assets/Menu.png';
 import Back from './assets/buttonBack.png';
 
 // eslint-disable-next-line react/prop-types
-// function MenuButton({ setMenuModalOpen }) {
-//   return (
-//     <View className="flex flex-col justify-center">
-//       <TouchableOpacity onPress={() => setMenuModalOpen(true)}>
-//         <Image className="w-6 h-6" source={MenuIcon} />
-//       </TouchableOpacity>
-//     </View>
-//   );
-// }
+function MenuButton({ setMenuModalOpen }) {
+  return (
+    <View className="flex flex-col justify-center">
+      <TouchableOpacity onPress={() => setMenuModalOpen(true)}>
+        <Image className="w-6 h-6" source={MenuIcon} />
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 // eslint-disable-next-line react/prop-types
 function BackButton({ navigate, backLink }) {
@@ -38,25 +40,34 @@ const styles = StyleSheet.create({
   },
 });
 
-function PageBase({ children, backLink, footer }) {
+function PageBase({ children, backLink, header, footer }) {
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
   const [menuModalOpen, setMenuModalOpen] = React.useState(false);
+  const { clear } = useWallet();
 
   return (
     <View className="flex min-h-full flex-col">
-      <View className="mt-2">
-        {backLink ? (
-          <View className="w-full flex flex-row justify-between px-6">
-            <BackButton navigate={navigate} backLink={backLink} />
-            {/* <MenuButton setMenuModalOpen={setMenuModalOpen} /> */}
-          </View>
-        ) : (
-          <View className="w-full flex flex-row justify-end px-6">
-            {/* <MenuButton setMenuModalOpen={setMenuModalOpen} /> */}
-          </View>
-        )}
-      </View>
+      {header ? (
+        <View className="mt-2">
+          {/* <Menu
+          onClose={() => {
+            setMenuModalOpen(false);
+          }}
+          isOpen={menuModalOpen}
+        /> */}
+          {backLink ? (
+            <View className="w-full flex flex-row justify-between px-6">
+              <BackButton navigate={navigate} backLink={backLink} />
+              <MenuButton setMenuModalOpen={clear} />
+            </View>
+          ) : (
+            <View className="w-full flex flex-row justify-end px-6">
+              <MenuButton setMenuModalOpen={clear} />
+            </View>
+          )}
+        </View>
+      ) : null}
 
       <View className="flex-grow flex flex-1 flex-col">{children}</View>
 
@@ -73,11 +84,13 @@ PageBase.propTypes = {
   children: PropTypes.node.isRequired,
   backLink: PropTypes.string,
   footer: PropTypes.bool,
+  header: PropTypes.bool,
 };
 
 PageBase.defaultProps = {
   backLink: undefined,
   footer: false,
+  header: false,
 };
 
 export default PageBase;

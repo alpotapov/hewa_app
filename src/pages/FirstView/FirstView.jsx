@@ -59,7 +59,7 @@ export default function FirstView() {
   }
 
   return (
-    <PageBase>
+    <PageBase header>
       <PageHeader />
       <Button
         margins="mx-2 mb-4 mt-4"
