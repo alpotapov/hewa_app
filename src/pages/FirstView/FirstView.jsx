@@ -12,6 +12,8 @@ import CardResultReceived from './components/CardResultReceived';
 import Button from '../../components/Button/Button';
 import useWallet from '../../hooks/wallet';
 
+import PlusIcon from './assets/PlusIcon.png';
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -59,7 +61,12 @@ export default function FirstView() {
   return (
     <PageBase>
       <PageHeader />
-      <Button margins="mx-2 mb-4" onPress={onAddTest} title="Add Test" />
+      <Button
+        margins="mx-2 mb-4 mt-4"
+        onPress={onAddTest}
+        title="Add Test"
+        icon={PlusIcon}
+      />
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={isLoading} onRefresh={refetch} />

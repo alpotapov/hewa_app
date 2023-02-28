@@ -13,7 +13,10 @@ function PageHeader() {
       />
       <View className="mt-4">
         <Text className="text-5xl font-bold">
-          <Text className="text-dull-lavender">Test{'\r\n'}</Text>Results
+          <Text className="text-sunset-orange">
+            Your{'\r\n'}Test{'\r\n'}
+          </Text>
+          Results
         </Text>
       </View>
     </View>

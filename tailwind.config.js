@@ -31,6 +31,9 @@ module.exports = {
         gray: {
           DEFAULT: '#8F8F8F',
         },
+        'sunset-orange': {
+          DEFAULT: '#F94A4A',
+        },
       },
     },
   },
