@@ -4,17 +4,10 @@ import PropTypes from 'prop-types';
 import DropShadow from 'react-native-drop-shadow';
 import { format } from 'date-fns';
 
-import CardResultInsufficient from './CardResultInsufficient';
-
 import BloodDrop from '../assets/BloodDrop.png';
+import Warning from '../assets/Warning.png';
 
-function CardResultReceived({ entry }) {
-  const isInsufficient = entry.remoteData.value <= 30;
-
-  if (isInsufficient) {
-    return <CardResultInsufficient entry={entry} />;
-  }
-
+function CardResultInsufficient({ entry }) {
   return (
     <DropShadow
       style={{
@@ -48,17 +41,21 @@ function CardResultReceived({ entry }) {
               <Text className="text-2xl"> {entry.remoteData.unit}</Text>
             </Text>
           </View>
+          <View className="flex flex-row justify-center items-center pb-2">
+            <Image className="h-6" source={Warning} resizeMode="contain" />
+            <Text className="ml-2 ">Insufficient</Text>
+          </View>
         </View>
       </View>
     </DropShadow>
   );
 }
 
-CardResultReceived.propTypes = {
+CardResultInsufficient.propTypes = {
   entry: PropTypes.shape({
     localData: PropTypes.shape().isRequired,
     remoteData: PropTypes.shape().isRequired,
   }).isRequired,
 };
 
-export default CardResultReceived;
+export default CardResultInsufficient;

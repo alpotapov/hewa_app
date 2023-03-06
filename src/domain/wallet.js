@@ -85,7 +85,7 @@ class Wallet {
               return acc;
             }
             acc.guids.push(result.id);
-            acc.results.push(result.valueQuantity.value);
+            acc.results.push(result.valueQuantity);
           }
           return acc;
         },
@@ -94,13 +94,16 @@ class Wallet {
 
       await Wallet.updateMany(
         guidsWithUpdates.guids,
-        guidsWithUpdates.results.map((result) => ({ remoteData: { result } })),
+        guidsWithUpdates.results.map((result) => ({
+          remoteData: { ...result },
+        })),
         'ResultReceived'
       );
       const updatedEntries = await Wallet.load();
       return updatedEntries;
     } catch (error) {
-      console.error(error);
+      console.log('???', error.message);
+      console.error(JSON.stringify(error.me));
       return walletEntries;
     }
   }
