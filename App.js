@@ -1,4 +1,6 @@
 /* eslint-disable react/style-prop-object */
+import './sentry';
+import * as Sentry from 'sentry-expo';
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
@@ -10,7 +12,7 @@ import ScanQRCode from './src/pages/ScanQRCode/ScanQRCode';
 
 const queryClient = new QueryClient();
 
-export default function App() {
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <NativeRouter>
@@ -25,3 +27,5 @@ export default function App() {
     </QueryClientProvider>
   );
 }
+
+export default Sentry.Native.wrap(App);

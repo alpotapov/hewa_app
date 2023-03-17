@@ -3,7 +3,7 @@
     "name": "HealthDrive",
     "slug": "healthdrive",
     "owner": "alpotapov",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -44,7 +44,20 @@
           "color": "#ffffff",
           "sounds": []
         }
+      ],
+      "sentry-expo"
+    ],
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "healthdrive",
+            "project": "hewa_app",
+            "authToken": "f236da7fbe6d4833b1561096b311138761cf0cc777e04d83aac00762bb65bcd7"
+          }
+        }
       ]
-    ]
+    }
   }
 }
