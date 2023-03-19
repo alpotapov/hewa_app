@@ -1,6 +1,6 @@
 /* eslint-disable react/style-prop-object */
 import './sentry';
-import * as Sentry from 'sentry-expo';
+import * as Sentry from '@sentry/react-native';
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
@@ -28,4 +28,4 @@ function App() {
   );
 }
 
-export default Sentry.Native.wrap(App);
+export default Sentry.wrap(App);
