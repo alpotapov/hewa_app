@@ -52,7 +52,7 @@ export default function FirstView() {
 
   if (welcomeView) {
     return (
-      <PageBase footer>
+      <PageBase header footer>
         <WelcomeView onAddTest={onAddTest} />
       </PageBase>
     );
