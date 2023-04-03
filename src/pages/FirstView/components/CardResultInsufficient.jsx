@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import DropShadow from 'react-native-drop-shadow';
 import { format } from 'date-fns';
 
-import OrangeButton from '../../../components/OrangeButton';
+// import OrangeButton from '../../../components/OrangeButton';
 
 import BloodDrop from '../assets/BloodDrop.png';
 import Warning from '../assets/Warning.png';
@@ -22,7 +22,7 @@ function CardResultInsufficient({ entry }) {
         shadowRadius: 5,
       }}
     >
-      <View className="flex flex-col bg-white rounded-3xl my-2 h-60">
+      <View className="flex flex-col bg-white rounded-3xl my-2 h-40">
         <View className="flex flex-row bg-white rounded-3xl h-40">
           <View className="w-1/3 flex flex-col items-center justify-center border-r border-dusty-gray">
             <Image className="h-6" source={BloodDrop} resizeMode="contain" />
@@ -50,14 +50,14 @@ function CardResultInsufficient({ entry }) {
             </View>
           </View>
         </View>
-        <View className="border-t border-dusty-gray h-20 flex flex-row px-2 py-2">
+        {/* <View className="border-t border-dusty-gray h-20 flex flex-row px-2 py-2">
           <View className="w-1/2 pr-1">
             <OrangeButton title="Schedule doctor's appointment" />
           </View>
           <View className="w-1/2 pl-1">
             <OrangeButton title={'Order\nsupplements'} innerWhite />
           </View>
-        </View>
+        </View> */}
       </View>
     </DropShadow>
   );
