@@ -3,7 +3,7 @@
     "name": "HealthDrive",
     "slug": "healthdrive",
     "owner": "alpotapov",
-    "version": "1.0.7",
+    "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -45,7 +45,13 @@
           "sounds": []
         }
       ],
-      "sentry-expo"
+      "sentry-expo",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "We need camera to scan the QR code"
+        }
+      ]
     ],
     "hooks": {
       "postPublish": [

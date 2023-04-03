@@ -33,5 +33,10 @@ export default () => {
     loadWallet();
   }, []);
 
-  return { walletEntries, isLoading, refetch, clear: walletDomain.clear };
+  const clear = async () => {
+    await walletDomain.clear();
+    refetch();
+  };
+
+  return { walletEntries, isLoading, refetch, clear };
 };

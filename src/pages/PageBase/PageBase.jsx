@@ -8,15 +8,16 @@ import { useNavigate } from 'react-router-native';
 import useWallet from '../../hooks/wallet';
 
 import Logo from './assets/Logo.png';
-import MenuIcon from './assets/Menu.png';
+// import MenuIcon from './assets/Menu.png';
+import DeleteIcon from './assets/Delete.png';
 import Back from './assets/buttonBack.png';
 
 // eslint-disable-next-line react/prop-types
-function MenuButton({ setMenuModalOpen }) {
+function MenuButton({ onClick }) {
   return (
     <View className="flex flex-col justify-center">
-      <TouchableOpacity onPress={() => setMenuModalOpen(true)}>
-        <Image className="w-6 h-6" source={MenuIcon} />
+      <TouchableOpacity onPress={() => onClick(true)}>
+        <Image className="w-6 h-6" source={DeleteIcon} />
       </TouchableOpacity>
     </View>
   );
@@ -50,20 +51,14 @@ function PageBase({ children, backLink, header, footer }) {
     <View className="flex min-h-full flex-col">
       {header ? (
         <View className="mt-2">
-          {/* <Menu
-          onClose={() => {
-            setMenuModalOpen(false);
-          }}
-          isOpen={menuModalOpen}
-        /> */}
           {backLink ? (
             <View className="w-full flex flex-row justify-between px-6">
               <BackButton navigate={navigate} backLink={backLink} />
-              <MenuButton setMenuModalOpen={clear} />
+              <MenuButton onClick={clear} />
             </View>
           ) : (
             <View className="w-full flex flex-row justify-end px-6">
-              <MenuButton setMenuModalOpen={clear} />
+              <MenuButton onClick={clear} />
             </View>
           )}
         </View>
