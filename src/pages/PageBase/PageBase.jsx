@@ -67,7 +67,7 @@ function PageBase({ children, backLink, header, footer }) {
       <View className="flex-grow flex flex-1 flex-col">{children}</View>
 
       {footer ? (
-        <View className="justify-between items-center mb-8">
+        <View className="justify-between items-center mb-24">
           <Image style={styles.logo} source={Logo} />
         </View>
       ) : null}

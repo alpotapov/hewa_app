@@ -3,7 +3,7 @@ import './sentry';
 import * as Sentry from '@sentry/react-native';
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -13,10 +13,11 @@ import ScanQRCode from './src/pages/ScanQRCode/ScanQRCode';
 const queryClient = new QueryClient();
 
 function App() {
+  const isAndroid = Platform.OS === 'android';
   return (
     <QueryClientProvider client={queryClient}>
       <NativeRouter>
-        <View className="pt-6">
+        <View className={`${isAndroid ? 'pt-12' : 'pt-6'}`}>
           <Routes>
             <Route path="/add-test" element={<ScanQRCode />} />
             <Route path="/" element={<FirstView />} />
