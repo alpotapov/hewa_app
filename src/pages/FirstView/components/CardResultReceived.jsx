@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import DropShadow from 'react-native-drop-shadow';
 import { format } from 'date-fns';
 
+// eslint-disable-next-line import/no-unresolved, import/extensions
+import CardBase from './CardBase';
 import CardResultInsufficient from './CardResultInsufficient';
 
 import BloodDrop from '../assets/BloodDrop.png';
@@ -16,18 +17,8 @@ function CardResultReceived({ entry }) {
   }
 
   return (
-    <DropShadow
-      style={{
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 0,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-      }}
-    >
-      <View className="flex flex-row bg-white rounded-3xl my-2 h-40">
+    <CardBase>
+      <View className="flex flex-row bg-white rounded-3xl h-40">
         <View className="w-1/3 flex flex-col items-center justify-center border-r border-dusty-gray">
           <Image className="h-6" source={BloodDrop} resizeMode="contain" />
           <Text className="text-amaranth font-bold text-xl mt-2">
@@ -50,7 +41,7 @@ function CardResultReceived({ entry }) {
           </View>
         </View>
       </View>
-    </DropShadow>
+    </CardBase>
   );
 }
 
